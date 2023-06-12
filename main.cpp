@@ -4,6 +4,13 @@
 #define LINE_WIDTH 10
 
 class Game {
+private:
+    char human = 'x', comp = 'o';
+    char grid[3][3] = {0};
+
+    enum TURN {TURN_COMP, TURN_HUMAN};
+    int turn = TURN_HUMAN;
+
 public:
     Color BTN_COLOR = BLUE;
     Color BTN_HOVERED = DARKBLUE;
@@ -12,38 +19,30 @@ public:
     enum SCREENS {MENU, GAME};
     int currentScreen;
 
-    char human = 'x', comp = 'o';
-    char grid[3][3] = {0};
-
-    enum TURN {TURN_COMP, TURN_HUMAN};
-    int turn = TURN_HUMAN;
-
     Texture2D crossTexture;
     Texture2D circleTexture;
 
     Rectangle gridRec = {160, 100, 409, 409};
 
-
-
-    //logika
+private:
 
     //Zwraca 1 jeśli wygra komputer, -1 jeśli wygra człowiek, 0 jeśli remis i 2 jeśli gra się nie zakończyła
     int gameWon() {
-        //checking rows
+        //sprawdza rzędy
         for (int y = 0; y < 3; y++) {
             if( (grid[y][0] == grid[y][1]) && (grid[y][1] == grid[y][2]) ) {
                 if (grid[y][0] == comp) return 1;
                 if (grid[y][0] == human) return -1;
             }
         }
-        //checking columns
+        //sprawdza kolumny
         for (int x = 0; x < 3; x++) {
             if( (grid[0][x] == grid[1][x]) && (grid[1][x] == grid[2][x]) ) {
                 if (grid[0][x] == comp) return 1;
                 if (grid[0][x] == human) return -1;
             }
         }
-        //checking diagonals
+        //sprawdza przekątne
         if( (grid[0][0] == grid[1][1]) && (grid[1][1] == grid[2][2]) ) {
             if (grid[0][0] == comp) return 1;
             if (grid[0][0] == human) return -1;
@@ -52,23 +51,25 @@ public:
             if (grid[1][1] == comp) return 1;
             if (grid[1][1] == human) return -1;
         }
-        //checking if there are available spots
+        //sprawdza czy jakiekolwiek pole jest puste
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
                 if(grid[y][x] == 0) return 0;
             }
         }
-        //return 2 if it's a tie
+        //jeśli remis zwraca dwa
         return 2;
     }
 
     //funkcja minimax wybiera najbardziej optymalny ruch
     int minimax(char board[3][3], int depth, bool isMaximizing) {
+        //warunek wyjscia z petli
         int isWon = gameWon();
         if (isWon != 0) {
             return isWon;
         }
 
+        //jesli tura komputera
         if(isMaximizing) {
             int bestScore = -1000000;
             for (int y = 0; y < 3; y++) {
@@ -86,6 +87,7 @@ public:
             }
             return bestScore;
         } else {
+            //jesli tura czlowieka
             int lovestScore = 1000000;
             for (int y = 0; y < 3; y++) {
                 for (int x = 0; x < 3; x++) {
@@ -112,6 +114,7 @@ public:
             for (int x = 0; x < 3; x++) {
                 if(board[y][x] == 0) {
                     board[y][x] = comp;
+                    //wywolanie funkcji minimax
                     int score = minimax(board, 0, false);
                     board[y][x] = 0;
                     if (score > bestScore) {
@@ -122,48 +125,14 @@ public:
                 }
             }
         }
+        //wykonanie ruchu
         grid[bestMove[0]][bestMove[1]] = comp;
-        turn = TURN_HUMAN;
     }
 
 
 
-    //funkcje UI
-    void mainMenu(){
 
-        auto mousePoint = GetMousePosition();
-
-        Rectangle startRec = {230, 250, 250, 50};
-        Rectangle exitRec = {300, 310, 110, 50};
-        Color startBtnColor = BTN_COLOR;
-        Color exitBtnColor = BTN_COLOR;
-
-        // wykrywanie klików i zmienianie koloru jeżeli jest najechane
-        if (CheckCollisionPointRec(mousePoint, startRec)) {
-            startBtnColor = BTN_HOVERED;
-            if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-                currentScreen = GAME;
-            }
-        }
-
-        if (CheckCollisionPointRec(mousePoint, exitRec)) {
-            exitBtnColor = BTN_HOVERED;
-            if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-                CloseWindow();
-            }
-        }
-
-        DrawRectangle(startRec.x, startRec.y, startRec.width, startRec.height, startBtnColor);
-        DrawText("START GAME", startRec.x + 20, startRec.y + 10, 30, WHITE);
-
-        DrawRectangle(exitRec.x, exitRec.y, exitRec.width, exitRec.height, exitBtnColor);
-        DrawText("EXIT", exitRec.x + 20, exitRec.y + 10, 30, WHITE);
-
-
-    }
-
-
-// rysuje zagrane kółka i krzyżyki
+    // rysuje zagrane kółka i krzyżyki
     void populateGrid(){
 
         for (int i = 0; i < 3; ++i) {
@@ -192,12 +161,15 @@ public:
 
 
 
-// wykonanie ruchu przez jednego z graczy
+    // wykonanie ruchu przez jednego z graczy
     void play(int i, int j){
+        if(grid[i][j] != 0) return;
+
         grid[i][j] = human;
         turn = TURN_COMP;
         aiMove(grid);
     }
+
 
     void drawWinnerAndReset(int winner) {
 
@@ -235,6 +207,40 @@ public:
     void drawKogoTura(){
         std::string turn_text = (turn == TURN_HUMAN) ? "your turn!" : "computers' turn!";
         DrawText(turn_text.c_str(), gridRec.x, 30, 30, WHITE);
+    }
+    public:
+
+    void mainMenu(){
+
+        auto mousePoint = GetMousePosition();
+
+        Rectangle startRec = {230, 250, 250, 50};
+        Rectangle exitRec = {300, 310, 110, 50};
+        Color startBtnColor = BTN_COLOR;
+        Color exitBtnColor = BTN_COLOR;
+
+        // wykrywanie klików i zmienianie koloru jeżeli jest najechane
+        if (CheckCollisionPointRec(mousePoint, startRec)) {
+            startBtnColor = BTN_HOVERED;
+            if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+                currentScreen = GAME;
+            }
+        }
+
+        if (CheckCollisionPointRec(mousePoint, exitRec)) {
+            exitBtnColor = BTN_HOVERED;
+            if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+                CloseWindow();
+            }
+        }
+
+        DrawRectangle(startRec.x, startRec.y, startRec.width, startRec.height, startBtnColor);
+        DrawText("START GAME", startRec.x + 20, startRec.y + 10, 30, WHITE);
+
+        DrawRectangle(exitRec.x, exitRec.y, exitRec.width, exitRec.height, exitBtnColor);
+        DrawText("EXIT", exitRec.x + 20, exitRec.y + 10, 30, WHITE);
+
+
     }
 
     void gameScreen(){
@@ -276,7 +282,7 @@ public:
         // rysuje zagrane kółka i krzyżyki
         populateGrid();
 
-        // tu podepnąc wykrywanie wygranej
+        // wykrywa wygraną
         int winner = gameWon();
         if(winner) drawWinnerAndReset(winner);
 
@@ -306,7 +312,7 @@ int main(void){
 
     game.currentScreen = game.MENU;
 
-    // głowny loop
+    // główny loop
     while (!WindowShouldClose()) {
 
         BeginDrawing();
