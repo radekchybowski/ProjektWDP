@@ -1,0 +1,19 @@
+# ninja log v5
+0	13	1686411403619756306	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-mkdir	2b30da944b05fbe9
+4000	4009	1686411407615738525	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-install	71cd6675298a6619
+0	13	1686411403619756306	/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-mkdir	2b30da944b05fbe9
+13	3969	1686411407576266757	/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-download	2c3edf79c494972e
+13	3969	1686411407576266757	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-download	2c3edf79c494972e
+4018	4033	1686411407640123627	/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-done	d5170efa354ee252
+3969	3979	1686411407586053472	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-patch	1c213f041492491e
+3991	4000	1686411407607429815	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-build	1e24ee0d86a4cf26
+3979	3991	1686411407597597768	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-configure	76f598f38a3a5de
+3969	3979	1686411407586053472	/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-patch	1c213f041492491e
+4018	4033	1686411407640123627	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-done	d5170efa354ee252
+3991	4000	1686411407607429815	/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-build	1e24ee0d86a4cf26
+4000	4009	1686411407615738525	/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-install	71cd6675298a6619
+4009	4018	1686411407625504699	/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-test	338624483ca94b1
+4018	4033	1686411407640123627	CMakeFiles/raylib-populate-complete	d5170efa354ee252
+3979	3991	1686411407597597768	/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-configure	76f598f38a3a5de
+4009	4018	1686411407625504699	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-test	338624483ca94b1
+4018	4033	1686411407640123627	/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/CMakeFiles/raylib-populate-complete	d5170efa354ee252

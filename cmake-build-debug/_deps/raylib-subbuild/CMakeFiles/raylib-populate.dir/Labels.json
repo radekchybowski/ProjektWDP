@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/CMakeFiles/raylib-populate"
+		},
+		{
+			"file" : "/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/CMakeFiles/raylib-populate.rule"
+		},
+		{
+			"file" : "/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/CMakeFiles/raylib-populate-complete.rule"
+		},
+		{
+			"file" : "/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-build.rule"
+		},
+		{
+			"file" : "/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-configure.rule"
+		},
+		{
+			"file" : "/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-download.rule"
+		},
+		{
+			"file" : "/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-install.rule"
+		},
+		{
+			"file" : "/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-mkdir.rule"
+		},
+		{
+			"file" : "/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-patch.rule"
+		},
+		{
+			"file" : "/Users/radek/Documents/Studia III rok/EPI/Semestr III/Algorytmy/CLion/projekt/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-test.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"raylib-populate"
+		],
+		"name" : "raylib-populate"
+	}
+}
