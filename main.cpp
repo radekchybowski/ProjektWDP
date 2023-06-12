@@ -1,3 +1,5 @@
+#include <chrono>
+#include <thread>
 #include "raylib.h"
 #include "iostream"
 #define SQUARE_SIZE 133
@@ -11,6 +13,8 @@ private:
     enum TURN {TURN_COMP, TURN_HUMAN};
     int turn = TURN_HUMAN;
 
+    Rectangle gridRec = {160, 100, 409, 409};
+
 public:
     Color BTN_COLOR = BLUE;
     Color BTN_HOVERED = DARKBLUE;
@@ -21,8 +25,6 @@ public:
 
     Texture2D crossTexture;
     Texture2D circleTexture;
-
-    Rectangle gridRec = {160, 100, 409, 409};
 
 private:
 
@@ -168,6 +170,7 @@ private:
         grid[i][j] = human;
         turn = TURN_COMP;
         aiMove(grid);
+        turn = TURN_HUMAN;
     }
 
 
