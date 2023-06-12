@@ -64,7 +64,7 @@ private:
     }
 
     //funkcja minimax wybiera najbardziej optymalny ruch
-    int minimax(char board[3][3], int depth, bool isMaximizing) {
+    int minimax(char board[3][3], bool isMaximizing) {
         //warunek wyjscia z petli
         int isWon = gameWon();
         if (isWon != 0) {
@@ -79,7 +79,7 @@ private:
                     //checks if spot is available
                     if(board[y][x] == 0) {
                         board[y][x] = comp;
-                        int score = minimax(board, depth+1, false);
+                        int score = minimax(board, false);
                         board[y][x] = 0;
                         if(score > bestScore) {
                             bestScore = score;
@@ -96,7 +96,7 @@ private:
                     //checks if spot is available
                     if(board[y][x] == 0) {
                         board[y][x] = human;
-                        int score = minimax(board,depth+1, true);
+                        int score = minimax(board, true);
                         board[y][x] = 0;
                         if(score < lovestScore) {
                             lovestScore = score;
@@ -117,7 +117,7 @@ private:
                 if(board[y][x] == 0) {
                     board[y][x] = comp;
                     //wywolanie funkcji minimax
-                    int score = minimax(board, 0, false);
+                    int score = minimax(board, false);
                     board[y][x] = 0;
                     if (score > bestScore) {
                         bestScore = score;
