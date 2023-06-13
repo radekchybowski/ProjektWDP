@@ -77,10 +77,10 @@ private:
             for (int y = 0; y < 3; y++) {
                 for (int x = 0; x < 3; x++) {
                     //checks if spot is available
-                    if(board[y][x] == 0) {
-                        board[y][x] = comp;
+                    if(board[x][y] == 0) {
+                        board[x][y] = comp;
                         int score = minimax(board, false);
-                        board[y][x] = 0;
+                        board[x][y] = 0;
                         if(score > bestScore) {
                             bestScore = score;
                         }
@@ -94,10 +94,10 @@ private:
             for (int y = 0; y < 3; y++) {
                 for (int x = 0; x < 3; x++) {
                     //checks if spot is available
-                    if(board[y][x] == 0) {
-                        board[y][x] = human;
+                    if(board[x][y] == 0) {
+                        board[x][y] = human;
                         int score = minimax(board, true);
-                        board[y][x] = 0;
+                        board[x][y] = 0;
                         if(score < lovestScore) {
                             lovestScore = score;
                         }
@@ -110,19 +110,21 @@ private:
 
     //wykonuje ruch komputera
     void aiMove(char board[3][3]) {
+        if (gameWon() != 0) return;
+
         int bestScore = -1000000;
         int bestMove[2] = {0};
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
-                if(board[y][x] == 0) {
-                    board[y][x] = comp;
+                if(board[x][y] == 0) {
+                    board[x][y] = comp;
                     //wywolanie funkcji minimax
                     int score = minimax(board, false);
-                    board[y][x] = 0;
+                    board[x][y] = 0;
                     if (score > bestScore) {
                         bestScore = score;
-                        bestMove[0]  = y;
-                        bestMove[1] = x;
+                        bestMove[0]  = x;
+                        bestMove[1] = y;
                     }
                 }
             }
@@ -131,14 +133,34 @@ private:
         grid[bestMove[0]][bestMove[1]] = comp;
     }
 
+    //zapisuje plansze do pliku tekstowego w tym samym katalogu co uruchomiony program
+    void saveFile() {
+        FILE *file;
+        file = fopen("board.txt","a");
+        if(file == NULL)
+        {
+            printf("Nie udało się zapisać pliku.");
+            return;
+        }
+        fprintf(file,"\n");
+        for(int y = 0; y < 3; y++) {
+            for(int x = 0; x < 3; x++) {
+                fprintf(file," ");
+                if (grid[x][y] == 0) fprintf(file," ");
+                else fprintf(file,"%c", grid[x][y]);
+                fprintf(file," |");
+            }
+            fprintf(file,"\n------------\n");
+        }
 
-
+        fclose(file);
+    }
 
     // rysuje zagrane kółka i krzyżyki
     void populateGrid(){
 
-        for (int i = 0; i < 3; ++i) {
-            for (int j = 0; j < 3; ++j) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
 
                 int square = grid[i][j];
                 Texture2D texture;
@@ -183,9 +205,9 @@ private:
         if(winner == 2) win_text = "It's a tie!";
 
         DrawText(win_text.c_str(), gridRec.x + 15, 550, 60, WHITE);
-
+        saveFile();
         // rysuje przycisk reset
-        Rectangle resetRec = {gridRec.x + 120, 630, 180, 50};
+        Rectangle resetRec = {gridRec.x-60, 630, 180, 50};
         Color btnColor = BTN_COLOR;
         auto mousePoint = GetMousePosition();
 
@@ -193,7 +215,6 @@ private:
             btnColor = BTN_HOVERED;
             if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
 
-                // tutaj dać funckje do resetowania (jak na razie po prostu czyśći array)
                 for (int i = 0; i < 3; ++i) {
                     for (int j = 0; j < 3; ++j) {
                         grid[i][j] = 0;
@@ -202,8 +223,24 @@ private:
             }
         }
 
+
         DrawRectangle(resetRec.x, resetRec.y, resetRec.width, resetRec.height, btnColor);
         DrawText("RESTART", resetRec.x + 20, resetRec.y + 10, 30, WHITE);
+
+        //rysuje przycisk zapisania planszy
+        Rectangle saveRec = {gridRec.x + 180, 630, 235, 50};
+        Color saveColor = BTN_COLOR;
+        auto mousePoint2 = GetMousePosition();
+
+        if (CheckCollisionPointRec(mousePoint2, resetRec)) {
+            saveColor = BTN_HOVERED;
+            if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+                saveFile();
+            }
+        }
+
+        DrawRectangle(saveRec.x, saveRec.y, saveRec.width, saveRec.height, saveColor);
+        DrawText("SAVE BOARD", saveRec.x + 20, saveRec.y + 10, 30, WHITE);
 
     }
 
