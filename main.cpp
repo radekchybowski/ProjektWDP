@@ -20,7 +20,7 @@ public:
     Color BTN_HOVERED = DARKBLUE;
     Color BACKGROUND = {53, 170, 176, 255};
 
-    enum SCREENS {MENU, GAME};
+    enum SCREENS {MENU, GAME, EXIT};
     int currentScreen;
 
     Texture2D crossTexture;
@@ -233,7 +233,8 @@ private:
         if (CheckCollisionPointRec(mousePoint, exitRec)) {
             exitBtnColor = BTN_HOVERED;
             if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-                CloseWindow();
+                currentScreen = EXIT;
+                return;
             }
         }
 
@@ -327,6 +328,9 @@ int main(void){
             case game.GAME:
                 game.gameScreen();
                 break;
+            case game.EXIT:
+                CloseWindow();
+                return 0;
         }
 
         ClearBackground(game.BACKGROUND);
