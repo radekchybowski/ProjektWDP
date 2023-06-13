@@ -1,5 +1,3 @@
-#include <chrono>
-#include <thread>
 #include "raylib.h"
 #include "iostream"
 #define SQUARE_SIZE 133
@@ -12,7 +10,7 @@ private:
 
     enum TURN {TURN_COMP, TURN_HUMAN};
     int turn = TURN_HUMAN;
-
+    bool saved = false;
     Rectangle gridRec = {160, 100, 409, 409};
 
 public:
@@ -200,9 +198,11 @@ private:
 
         // rysuje kto wygrał
         std::string win_text;
+        std::string save_text = "";
         if (winner == 1) win_text = "Computer won!";
         if (winner == -1) win_text = "Human won!";
         if(winner == 2) win_text = "It's a tie!";
+        if(saved == true) win_text = "Saved board.txt";
 
         DrawText(win_text.c_str(), gridRec.x + 15, 550, 60, WHITE);
 
@@ -220,12 +220,13 @@ private:
                         grid[i][j] = 0;
                     }
                 }
+                saved = false;
             }
         }
 
-
         DrawRectangle(resetRec.x, resetRec.y, resetRec.width, resetRec.height, btnColor);
         DrawText("RESTART", resetRec.x + 20, resetRec.y + 10, 30, WHITE);
+
 
         //rysuje przycisk zapisania planszy
         Rectangle saveRec = {gridRec.x + 180, 630, 235, 50};
@@ -235,13 +236,14 @@ private:
         if (CheckCollisionPointRec(mousePoint2, saveRec)) {
             saveColor = BTN_HOVERED;
             if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+                //funkcja zapisu do pliku
                 saveFile();
+                saved = true;
             }
         }
 
         DrawRectangle(saveRec.x, saveRec.y, saveRec.width, saveRec.height, saveColor);
         DrawText("SAVE BOARD", saveRec.x + 20, saveRec.y + 10, 30, WHITE);
-
     }
 
     void drawKogoTura(){
