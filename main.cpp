@@ -26,7 +26,7 @@ public:
 
 private:
 
-    //Zwraca 1 jeśli wygra komputer, -1 jeśli wygra człowiek, 0 jeśli remis i 2 jeśli gra się nie zakończyła
+    //Zwraca 1 jeśli wygra komputer, -1 jeśli wygra człowiek, 2 jeśli remis i 0 jeśli gra się nie zakończyła
     int gameWon() {
         //sprawdza rzędy
         for (int y = 0; y < 3; y++) {
