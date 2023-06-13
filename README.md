@@ -5,21 +5,6 @@
   <meta name="author" content="Patrycja Gołdyś, Radosław Chybowski">
   <title>WDP Projekt - dokumentacja</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <style>
-    img {
-      max-width: 400px;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-
-    footer {
-      text-align: center;
-      background-color: rgb(217, 217, 217);
-      border-radius: 10px;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
-  </style>
 </head>
 <body class="container">
   <div class="row">
