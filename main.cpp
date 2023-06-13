@@ -205,7 +205,7 @@ private:
         if(winner == 2) win_text = "It's a tie!";
 
         DrawText(win_text.c_str(), gridRec.x + 15, 550, 60, WHITE);
-        saveFile();
+
         // rysuje przycisk reset
         Rectangle resetRec = {gridRec.x-60, 630, 180, 50};
         Color btnColor = BTN_COLOR;
@@ -214,7 +214,7 @@ private:
         if (CheckCollisionPointRec(mousePoint, resetRec)) {
             btnColor = BTN_HOVERED;
             if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-
+                //reset tablicy
                 for (int i = 0; i < 3; ++i) {
                     for (int j = 0; j < 3; ++j) {
                         grid[i][j] = 0;
@@ -232,7 +232,7 @@ private:
         Color saveColor = BTN_COLOR;
         auto mousePoint2 = GetMousePosition();
 
-        if (CheckCollisionPointRec(mousePoint2, resetRec)) {
+        if (CheckCollisionPointRec(mousePoint2, saveRec)) {
             saveColor = BTN_HOVERED;
             if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
                 saveFile();
